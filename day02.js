@@ -37,7 +37,7 @@ function solution_1 (J, S) {
 var solution_2=(J,S,D={},c=0)=>(J.split('').map(j=>D[j]=1),S.split('').map(s=>D[s]&&c++))|c
 
 // one-liner - shorter but less efficient
-var solution_3=(J,S)=>S.split('').reduce((c,s)=>c+!!J.includes(s),0)
+var solution_3=(J,S)=>S.split('').reduce((c,s)=>c+J.includes(s),0)
 
 const numJewelsInStones = solution_3;
 
