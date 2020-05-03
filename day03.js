@@ -35,7 +35,10 @@ var solution_3=(r,m,o={})=>[...m].map(e=>o[e]=(o[e]|0)+1)&&[...r].every(e=>o[e]-
 // my improvement on thomas' one-liner - got rid of 2 parentheses by writing `o[e]+1|1` instead of `(o[e]|0)+1`
 var solution_4=(r,m,o={})=>[...m].map(e=>o[e]=o[e]+1|1)&&[...r].every(e=>o[e]--)
 
-const canConstruct = solution_4;
+// alex mok's one-liner - trading efficiency for shorter code. for every letter in the ransom note, check whether the message includes that letter. if so, replace the first occurrence of that letter with ''
+var solution_5=(r,m)=>[...r].every(e=>m.includes(e)?m=m.replace(e,''):0)
+
+const canConstruct = solution_5;
 
 // const specialTest = (...args) => {
 // };
