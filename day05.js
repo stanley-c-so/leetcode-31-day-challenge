@@ -36,7 +36,11 @@ var solution_3=(s,p=[...s],o={},z=-1)=>p.map(e=>o[e]=o[e]+1|1)&&p.map((e,i)=>o[e
 // hybrid of our one-liners - borrowed a few of thomas' ideas, and refactored the ternary to shorten by 1 character. also brought back `|r`
 var solution_4=(s,S=[...s],f={},r=-1)=>S.map(c=>f[c]=f[c]+1|1)&&S.map((c,i)=>f[c]-1|r+1?0:r=i)|r
 
-const firstUniqChar = solution_4;
+// alex mok's one-liner - filter `[...s]` to keep only those elements where indexOf that element matches lastIndexOf that element. grab the first
+// such element (if any). return the string's indexOf that element.
+var solution_5=s=>s.indexOf([...s].filter(e=>s.indexOf(e)==s.lastIndexOf(e))[0])
+
+const firstUniqChar = solution_5;
 
 // const specialTest = (...args) => {
 // };
