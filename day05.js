@@ -34,7 +34,7 @@ var solution_2=(s,f={},S=[...s],r=-1)=>(S.map(c=>f[c]=(f[c]||0)+1),S.map((c,i)=>
 var solution_3=(s,p=[...s],o={},z=-1)=>p.map(e=>o[e]=o[e]+1|1)&&p.map((e,i)=>o[e]-1?0:z+1?z:z=i)&&z
 
 // hybrid of our one-liners - borrowed a few of thomas' ideas, and refactored the ternary to shorten by 1 character. also brought back `|r`
-var solution_4=(s,S=[...s],f={},r=-1)=>S.map(c=>f[c]=f[c]+1|1)&&S.map((c,i)=>f[c]-1||r+1?0:r=i)|r
+var solution_4=(s,S=[...s],f={},r=-1)=>S.map(c=>f[c]=f[c]+1|1)&&S.map((c,i)=>f[c]-1|r+1?0:r=i)|r
 
 const firstUniqChar = solution_4;
 
