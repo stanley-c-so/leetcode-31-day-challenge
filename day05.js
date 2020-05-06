@@ -29,7 +29,8 @@ function solution_1 (s) {
 // one-liner - basically the above
 var solution_2=(s,f={},S=[...s],r=-1)=>(S.map(c=>f[c]=(f[c]||0)+1),S.map((c,i)=>r=f[c]==1&&r<0?i:r))|r
 
-// thomas luo's improvement on my one-liner - using `o[e]+1|1` instead of `(f[c]||0)+1`, ... && ... to avoid (... , ...), and chained ternary
+// thomas luo's improvement on my one-liner - using `o[e]+1|1` instead of `(f[c]||0)+1` (BUT BE CAREFUL: | 1 APPLIES BITWISE OR WHICH, HERE, WILL MAKE
+// YOUR FREQUENCIES GO UP BY 2 - THOUGH IT WON'T MESS UP THE LOGIC FOR THIS SPECIFIC PROBLEM), ... && ... to avoid (... , ...), and chained ternary
 // statements as a substitute for checking `f[c]==1&&r<0` (although this is not better!!)
 var solution_3=(s,p=[...s],o={},z=-1)=>p.map(e=>o[e]=o[e]+1|1)&&p.map((e,i)=>o[e]-1?0:z+1?z:z=i)&&z
 
