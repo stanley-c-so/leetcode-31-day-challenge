@@ -49,7 +49,12 @@ var solution_2=(R,x,y,N=[],s=[[R,null,0]])=>{while(s.length){[n,p,d]=s.pop();N[n
 // thomas luo's one-liner (doesn't work in node unless you change `&` to `&&` and the final `||` to `|` - here, i just changed it)
 var solution_3=(r,x,y,a,b,c,d,h=(r,x,y,p,l=0)=>{r?h(r.left,x,y,r,l+1)|h(r.right,x,y,r,l+1)|r.val==x?a=(c=p)&&l:r.val==y?b=(d=p)&&l:0:0})=>h(r,x,y)||a==b&&c!=d
 
-const isCousins = solution_3;
+// alex mok's one-liner (doesn't work in node unless you change `|` after `t(r,0)` to `&&` - here, i just changed it) - here, we declare a helper function where we feed in a node, level, and
+// parent, and the function plugs this info into the `h` object, along with a recursive call to the node's children (we uselessly store this inside the `h` object as well). we kick start the
+// process with the root. then at the very end we simply query the `h` object and see whether x and y are the same level, but don't have the same parents.
+var solution_4=(r,x,y,h={},t=(n,l,p)=>n?h[n.val]=[l++,p,t(n.left,l,n),t(n.right,l,n)]:0)=>t(r,0)&&h[x][0]==h[y][0]&&h[x][1]!=h[y][1]
+
+const isCousins = solution_4;
 
 // };
 
