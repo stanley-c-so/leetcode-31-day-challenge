@@ -68,7 +68,7 @@ function solution_2 (image, sr, sc, newColor) {
 }
 
 // one-liner - basically the above
-var solution_3=(i,R,C,n,h=i.length,w=i[0].length,o=i[R][C],H=(r,c)=>r>=0&&r<h&&c>=0&&c<w&&i[r][c]==o&&(i[r][c]=n,H(r-1,c),H(r+1,c),H(r,c-1),H(r,c+1)))=>(n!=o?H(R,C):0,i)
+var solution_3=(i,R,C,n,o=i[R][C],H=(r,c)=>r>=0&&r<i.length&&c>=0&&c<i[0].length&&i[r][c]==o&&(i[r][c]=n,H(r-1,c),H(r+1,c),H(r,c-1),H(r,c+1)))=>(n!=o?H(R,C):0,i)
 
 const floodFill = solution_3;
 
