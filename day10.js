@@ -58,7 +58,10 @@ function solution_1 (N, trust) {
 // himself, which would make him not a judge)
 var solution_2=(N,t,a=[],r=-1)=>N==1?1:(t.map(p=>([A,B]=p,a[A]=a[A]||[!6,0],a[B]=a[B]||[!9,0],a[A][0]=!0,a[B][1]++)),a.map((p,i)=>r=p&&!p[0]&&p[1]==N-1?i:r))&&r
 
-const findJudge = solution_2;
+// improved one-liner - using .reduce at the end, using `|` between the .map and the .reduce, and using `N-1` instead of `N==1` in the ternary (swapping the cases)
+var solution_3=(N,t,a=[])=>N-1?t.map(p=>([A,B]=p,a[A]=a[A]||[!6,0],a[B]=a[B]||[!9,0],a[A][0]=!0,a[B][1]++))|a.reduce((r,p,i)=>p&&!p[0]&&p[1]==N-1?i:r,-1):1
+
+const findJudge = solution_3;
 
 // const specialTest = (...args) => {
 // };
