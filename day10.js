@@ -38,7 +38,7 @@
 // someone who (1) trusts no one, and (2) is trusted by all `N - 1` other people in the town. note that it is impossible for more than 1 person to fit this description (if you have 2 or more
 // people who trust no one, then nobody could be trusted by `N - 1` people). if found, such a person is the judge. if nobody in the `trustObj` matches those criteria, return -1 for no judge.
 function solution_1 (N, trust) {
-  if (N === 1 && !trust.length) return 1;                           // edge case: the town only has 1 person and he doesn't trust anyone - he must be the judge
+  if (N === 1 && !trust.length) return 1;                           // EDGE CASE: the town only has 1 person and he doesn't trust anyone - he must be the judge
   const trustObj = {};                                              // each person involved somehow in a trust pair will be in `trustObj`. the value will be an array of length 2.
   for (const trustPair of trust) {
     const [A, B] = trustPair;
@@ -61,7 +61,11 @@ var solution_2=(N,t,a=[],r=-1)=>N==1?1:(t.map(p=>([A,B]=p,a[A]=a[A]||[!6,0],a[B]
 // improved one-liner - using .reduce at the end, using `|` between the .map and the .reduce, and using `N-1` instead of `N==1` in the ternary (swapping the cases)
 var solution_3=(N,t,a=[])=>N-1?t.map(p=>([A,B]=p,a[A]=a[A]||[!6,0],a[B]=a[B]||[!9,0],a[A][0]=!0,a[B][1]++))|a.reduce((r,p,i)=>p&&!p[0]&&p[1]==N-1?i:r,-1):1
 
-const findJudge = solution_3;
+// thomas luo's one-liner - initialize an array of size `N + 1` and fill it with `0`. run through the trust pairs - the "truster" should be decremented in the array, and the "trusted" should be
+// incremented. in the end, simply check for someone whose value in the array is equal to `N - 1` (only possible if `N - 1` people trusted him AND he trusted no one)
+var solution_4=(N,t,a=Array(N+1).fill(0),p=-1)=>t.map(([r,d])=>a[r]--&a[d]++)|a.map((i,x)=>i==N-1?p=x:0)|p
+
+const findJudge = solution_4;
 
 // const specialTest = (...args) => {
 // };
