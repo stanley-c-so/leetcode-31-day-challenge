@@ -55,7 +55,13 @@ function solution_1 (num, k) {
 // one-liner - basically the above, but without unnecessary optimizations
 var solution_2=(n,k,l='length',s=[])=>{for(i=0;i<n[l];++i){while(k&&s[s[l]-1]>n[i]){s.pop();--k}s.push(n[i])}for(i=0;i<k;++i)s.pop();o=s.join('');i=0;while(o[i]=='0')++i;return o.slice(i)||'0'}
 
-const removeKdigits = solution_2;
+// alex mok's one-liner - start with the entire string split up into the stack array. initialize `i` at 0 and work through the same logic while `k` is positive. shift to remove leading 0s.
+var solution_3=([...n],k,i=0)=>{while(i<n.length&&k)n[i]>n[i+1]?n.splice(i--,1)&k--:i++;while(k-->0)n.pop();while(n[0]=='0')n.shift();return n[0]?n.join(''):'0'}
+
+// my improvement on alex's one-liner - turned `while(k-->0)` into `while(k--)`, as well as the expression that gets returned
+var solution_4=([...n],k,i=0)=>{while(i<n.length&&k)n[i]>n[i+1]?n.splice(i--,1)&k--:i++;while(k--)n.pop();while(n[0]=='0')n.shift();return n.join('')||'0'}
+
+const removeKdigits = solution_4;
 
 // const specialTest = (...args) => {
 // };
