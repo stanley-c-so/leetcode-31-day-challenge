@@ -101,7 +101,31 @@ function solution_2 (A) {
 // one-liner - basically the above
 var solution_3=A=>(m=Infinity,M=-m,C=c=t=b=A[0],e=!0,A.map((n,i)=>i?(C=C+n>n?C+n:n,c=c+n<n?c+n:n,M=M>C?M:C,m=m<c?m:c,t+=n,b=b>n?b:n,e=n<0?e:!8):0))&&e?b:M>t-m?M:t-m
 
-const maxSubarraySumCircular = solution_3;
+// alex mok's regular solution - similar idea, except the for loop can include the first element as well. `sum1` and `sum2` are basically like `maxSoFar` and `minSoFar`, except if they
+// ever end up on the wrong side of 0, they get reset to 0. the way to check for the edge case of the entire array being negative is to check whether `total === min`.
+function solution_4 (A) {
+  let max = -Infinity;
+  let min = Infinity;
+  let total = 0;
+  let sum1 = 0;
+  let sum2 = 0;
+  for(let i = 0; i < A.length; i++){
+      total += A[i];
+      sum1 += A[i];                           // previous max sum + current
+      sum2 += A[i];                           // previous min sum + current
+      max = Math.max(max, sum1);
+      if (sum1 < 0) sum1 = 0;                 // reset `sum1` to 0 if it is negative
+      min = Math.min(sum2, min);
+      if (sum2 > 0) sum2 = 0;                 // reset `sum2` to 0 if it is positive
+  }
+  if (total === min) return max;              // EDGE CASE: if every number was negative, then `total === min`, and we must return `max` instead
+  else return Math.max(max, total - min);
+};
+
+// alex mok's one-liner
+var solution_5=(A,m=Infinity,M=-m,t=i=j=0)=>A.map(e=>{t+=e;i+=e;j+=e;M=M>i?M:i;i=i<0?0:i;m=m>j?j:m;j=j>0?0:j})|t==m?M:M>t-m?M:t-m
+
+const maxSubarraySumCircular = solution_5;
 
 // const specialTest = (...args) => {
 // };
