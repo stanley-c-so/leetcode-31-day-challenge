@@ -60,7 +60,11 @@ function solution_1 (s, p) {
   return output;
 }
 
-const findAnagrams = solution_1;
+// one-liner - basically the above, but instead of deleting empty keys, i just check whether every key has a value of 0 to determine whether to push this iteration into the output.
+// as a result, i can simplify a bit of the logic for outgoing letters (i don't need to check if their key already exists).
+var solution_2=(s,p,O=[],f={},P=p.length)=>[...p].map(c=>f[c]=f[c]?f[c]-1:-1)&&[...s].map((n,i)=>(f[n]=f[n]?f[n]+1:1,i>=P?(o=s[i-P],f[o]--):0,Object.keys(f).every(k=>!f[k])?O.push(i-P+1):0))&&O
+
+const findAnagrams = solution_2;
 
 // const specialTest = (...args) => {
 // };
