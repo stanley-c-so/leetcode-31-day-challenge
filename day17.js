@@ -64,7 +64,13 @@ function solution_1 (s, p) {
 // as a result, i can simplify a bit of the logic for outgoing letters (i don't need to check if their key already exists).
 var solution_2=(s,p,O=[],f={},P=p.length)=>[...p].map(c=>f[c]=f[c]?f[c]-1:-1)&&[...s].map((n,i)=>(f[n]=f[n]?f[n]+1:1,i>=P?(o=s[i-P],f[o]--):0,Object.keys(f).every(k=>!f[k])?O.push(i-P+1):0))&&O
 
-const findAnagrams = solution_2;
+// alex mok's one-liner - basically instead of a frequency object, we use an array of size 122 to hold counts for ASCII values of letters, and we compare those arrays (by joining) against that of `p`
+var solution_3=(s,p,A=Array(122).fill(0),f=(w,a=[...A])=>[...w].map(e=>a[e.charCodeAt()]++)&&a.join``,P=f(p),r=[])=>[...s].map((e,i)=>f(s.slice(i,i+p.length))==P?r.push(i):0)&&r
+
+// my better one-liner - iterate through `p.length` size slices of `s`, sort them, and join into strings. compare against the sorted string version of `p`. if they match, push into output
+var solution_4=(s,p,x=[...p].sort().join(''),o=[])=>[...s].map((_,i)=>[...s.slice(i,i+p.length)].sort().join('')==x?o.push(i):0)&&o
+
+const findAnagrams = solution_4;
 
 // const specialTest = (...args) => {
 // };
