@@ -42,7 +42,10 @@ function solution_1 (s1, s2) {
 // (by joining) against that of `s1`
 var solution_2=(s,S,A=Array(122).fill(0),f=(w,a=[...A])=>[...w].map(e=>a[e.charCodeAt()]++)&&a.join``,x=f(s),r=!8)=>[...S].map((_,i)=>r=f(S.slice(i,i+s.length))==x?!0:r)&&r
 
-const checkInclusion = solution_2;
+// alex mok's one-liner - he basically checks whether it's NOT true that EVERY slice of the main string is NOT an anagram of the search string
+var solution_3=(s,S,A=Array(122).fill(0),f=(w,a=[...A])=>[...w].map(e=>a[e.charCodeAt()]++)&&a.join``,X=f(s))=>![...S].every((e,i)=>f(S.slice(i,i+s.length))!==X)
+
+const checkInclusion = solution_3;
 
 // const specialTest = (...args) => {
 // };
