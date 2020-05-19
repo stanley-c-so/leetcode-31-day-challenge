@@ -75,7 +75,7 @@ const specialTest = (commands, inputs) => {
   for (let i = 0; i < commands.length; i++) {
     output.push(
       ref[commands[i]].bind(trie)(...inputs[i])   // ...but each method still needs to be given `trie` as its `this` context
-    )
+    );
   }
   return output;
 };
