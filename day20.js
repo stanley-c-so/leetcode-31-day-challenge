@@ -75,7 +75,10 @@ var solution_3=(r,k,o,h=n=>{if(n.left){h(n.left);if(!k)return}o=n.val;if(!--k)re
 // one-liner of iterative solution, except since the function makes no reference to the original `root` (beyond initializing `node`), we can replace `node` with `root` (`r`)
 var solution_4=(r,k,s=[])=>{while(!0){while(r){s.push(r);r=r.left}r=s.pop();if(!--k)return r.val;r=r.right}}
 
-const kthSmallest = solution_4;
+// alex mok's one-liner - this puts all values into an array while performing DFS, and grabs the kth smallest value
+var solution_5=(r,k,R=[],f=n=>n?f(n.left)|R.push(n.val)|f(n.right):0)=>f(r)&R[k-1]
+
+const kthSmallest = solution_5;
 
 // const specialTest = (...args) => {
 // };
