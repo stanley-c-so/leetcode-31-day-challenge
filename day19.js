@@ -80,7 +80,7 @@ class solution_2 {
 }
 
 // one-liner - basically the above
-class solution_3{constructor(){this.s=[]}next(p){let s=1;let T=this.s;while(T.length&&T[T.length-1].p<=p){s+=T.pop().s}T.push({p,s});return s}}
+class solution_3{constructor(){this.s=[]}next(p,s=1,T=this.s){while(T[0]&&T[T.length-1].p<=p){s+=T.pop().s}T.push({p,s});return s}}
 
 const StockSpanner = solution_3;
 
