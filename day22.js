@@ -68,7 +68,11 @@ function solution_1 (s) {
 // one-liner - basically the above
 var solution_2=(s,f={},a=Array(s.length+1),o='')=>{for(c of s)f[c]=++f[c]||1;for(c in f){if(!a[f[c]])a[f[c]]=[];a[f[c]].push(c)}for(i=a.length-1;i>=0;--i)if(a[i])for(c of a[i])o+=c.repeat(i);return o}
 
-const frequencySort = solution_2;
+// alex mok's one-liner - create the frequency object, then take Object.entries of that object, sort it by frequency, and then map each entry to the character repeated by the appropriate number of
+// times. finally, join this all together into a string
+var solution_3=(s,m={})=>[...s].map(c=>m[c]=m[c]+1||1)&&[...Object.entries(m)].sort((a,b)=>b[1]-a[1]).map(([c,f])=>c.repeat(f)).join``
+
+const frequencySort = solution_3;
 
 const specialTest = (s, solutions) => {
   return solutions.includes(frequencySort(s));
