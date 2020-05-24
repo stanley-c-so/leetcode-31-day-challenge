@@ -56,8 +56,6 @@ var solution_4=(r,x,y,h={},t=(n,l,p)=>n?h[n.val]=[l++,p,t(n.left,l,n),t(n.right,
 
 const isCousins = solution_4;
 
-// };
-
 // NOTE: I developed the following BinaryTree and Batch classes for easy creation of binary trees with arbitrary values.
 // first .insert must END with 'true' argument
 // subsequent .inserts must START with 'false' argument...
