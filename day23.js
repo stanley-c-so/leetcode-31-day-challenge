@@ -93,7 +93,10 @@ function solution_2 (A, B) {
 // one-liner - adopted from alex's main solution
 var solution_3=(A,B,o=[],i=j=0)=>{while(i<A.length&&j<B.length){let [s,e]=A[i],[S,E]=B[j],m=Math.max(s,S),M=Math.min(e,E);m>M?0:o.push([m,M]);e>E?j++:i++}return o}
 
-const intervalIntersection = solution_3;
+// alex mok's one-liner
+var solution_4=(A,B,r=[],i=j=0)=>{while(A[i]&&B[j]){[x,y]=A[i];[X,Y]=B[j];(m=X>x?X:x)<=(M=Y<y?Y:y)?r.push([m,M]):0;y>Y?j++:i++}return r}
+
+const intervalIntersection = solution_4;
 
 // const specialTest = (...args) => {
 // };
