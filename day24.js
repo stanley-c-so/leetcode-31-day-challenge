@@ -97,7 +97,13 @@ function solution_3 (preorder) {
 // one-liner - iterative solution
 var solution_4=(p,T=TreeNode,r=new T(p[0]),s=[r],l='length')=>{for(i=1;i<p[l];++i){let n=s[s[l]-1],c=new T(p[i]);while(s[l]&&s[s[l]-1].val<c.val)n=s.pop();n.val<c.val?n.right=c:n.left=c;s.push(c)}return r}
 
-const bstFromPreorder = solution_4;
+// thomas luo's one-liner
+var solution_5=(p,T=TreeNode,r=new T(p[0]),I=(v,n)=>n?(v>n.val?n.right=I(v,n.right):n.left=I(v,n.left))&&n:new T(v))=>p.map((v,i)=>i&&I(v,r))&&r
+
+// alex mok's one-liner
+var solution_6=(a,I=Infinity,f=(l,h,c=a[0],t=!c||c<l||c>h?null:new TreeNode(a.shift()),N=t&&[t.left=f(l,t.val),t.right=f(t.val,h)])=>t)=>f(-I,I)
+
+const bstFromPreorder = solution_6;
 
 // const specialTest = (...args) => {
 // };
