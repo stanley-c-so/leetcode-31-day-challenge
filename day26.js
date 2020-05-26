@@ -32,8 +32,8 @@ function solution_1 (nums) {
   return max;
 }
 
-// one-liner - basically the above
-var solution_2=(n,h={0:-1},m=d=0)=>n.map((e,i)=>(e?d++:d--,d in h?(x=i-h[d],m=m>x?m:x):h[d]=i))|m
+// one-liner - basically the above (improved with thomas luo's suggestion)
+var solution_2=(n,h={0:-1},m=d=0)=>n.map((e,i)=>((e?++d:--d) in h?(x=i-h[d],m=m>x?m:x):h[d]=i))|m
 
 const findMaxLength = solution_2;
 
