@@ -162,7 +162,7 @@ function solution_2 (N, dislikes, dislikesObj) {
 }
 
 // one-liner - basically the above (note that in leetcode, `arguments.callee` won't work for some reason, so replace it with the proper name)
-var solution_3=(N,d,o,g={},v={},l='length',O=Object,K=O.keys)=>{if(d!==null&&!d[l])return !0;if(!o){o=d.reduce((o,p)=>{let [a,b]=p;if(!(a in o))o[a]=[];if(!(b in o))o[b]=[];o[a].push(b);o[b].push(a);return o},{})};if(!K(o)[l])return !0;let s=[+O.entries(o)[0][0]];while(s[l]){let H=s.pop();if(!(H in v)){let h=o[H];if(!(H in g)){g[H]='A';v[H]=1;for(p of h){g[p]='B';s.push(p)}delete o[H]}else if(g[H]=='A'){v[H]=1;for(p of h){if(g[p]=='A')return !6;g[p]='B';s.push(p)}delete o[H]}else{v[H]=1;for(p of h){if(g[p]=='B')return !9;g[p]='A';s.push(p)}delete o[H]}}}if(K(g).length==N)return !0;return arguments.callee(N-K(g)[l],null,o)}
+var solution_3=(N,d,o,g={},v={},l='length',O=Object,K=O.keys,P='push')=>{if(d!==null&&!d[l])return !0;if(!o){o=d.reduce((o,p)=>{let [a,b]=p;if(!(a in o))o[a]=[];if(!(b in o))o[b]=[];o[a][P](b);o[b][P](a);return o},{})};if(!K(o)[l])return !0;let s=[+O.entries(o)[0][0]];while(s[l]){let H=s.pop();if(!(H in v)){let h=o[H];if(!(H in g)){g[H]='A';v[H]=1;for(p of h){g[p]='B';s[P](p)}delete o[H]}else if(g[H]=='A'){v[H]=1;for(p of h){if(g[p]=='A')return !6;g[p]='B';s[P](p)}delete o[H]}else{v[H]=1;for(p of h){if(g[p]=='B')return !9;g[p]='A';s[P](p)}delete o[H]}}}if(K(g).length==N)return !0;return arguments.callee(N-K(g)[l],null,o)}
 
 const possibleBipartition = solution_3;
 
