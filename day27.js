@@ -205,7 +205,7 @@ var solution_4 = function (N, dislikes) {
 var solution_5=(N,d)=>{a=[];g=Array(N+1).fill(0);c=N+1;while(c--) a.push(Array());for([x,y] of d){a[x].push(y);a[y].push(x)};for(i=1;i<=N;i++){if(g[i]==0&&!h(i,1))return 0}return 1;function h(i,j){if(g[i]!=0){if(g[i]!=j)return 0;else return 1}if(a[i].length==0){g[i]=j;return 1}g[i]=j;for(val of a[i])if(!h(val,-1*j))return 0;return 1}}
 
 // my improvement on alex mok's one-liner
-var solution_6=(N,d,g=Array(N+1).fill(0),a=g.map(_=>[]),h=(i,t)=>{if(g[i])return g[i]==t;g[i]=t;for(v of a[i]){if(!h(v,t*-1))return !6}return !0})=>{for([x,y]of d){a[x].push(y);a[y].push(x)}for(i=1;i<=N;++i){if(!g[i]&&!h(i,1))return !9}return !0}
+var solution_6=(N,d,g=Array(N+1).fill(0),a=g.map(_=>[]),h=(i,t)=>{if(g[i])return g[i]==t;g[i]=t;for(v of a[i]){if(!h(v,-t))return !6}return !0})=>{for([x,y]of d){a[x].push(y);a[y].push(x)}for(i=1;i<=N;++i){if(!g[i]&&!h(i,1))return !9}return !0}
 
 const possibleBipartition = solution_6;
 
