@@ -165,7 +165,49 @@ function solution_2 (N, dislikes, dislikesObj) {
 // (special thanks to manny bugallo for the various improvements for shortening this one-liner)
 var solution_3=(N,d,o,g={},v={},l='length',K=Object.keys,P='push')=>{if(d!==null&&!d[l])return !0;if(!o){o=d.reduce((o,p)=>{let [a,b]=p;if(!(a in o))o[a]=[];if(!(b in o))o[b]=[];o[a][P](b);o[b][P](a);return o},{})};if(!K(o)[l])return !0;let s=[+K(o)[0]];while(s[l]){let H=s.pop();if(!(H in v)){let h=o[H];if(!(H in g)){g[H]='A';v[H]=1;for(p of h){g[p]='B';s[P](p)}delete o[H]}else if(g[H]=='A'){v[H]=1;for(p of h){if(g[p]=='A')return !6;g[p]='B';s[P](p)}delete o[H]}else{v[H]=1;for(p of h){if(g[p]=='B')return !9;g[p]='A';s[P](p)}delete o[H]}}}if(K(g).length==N)return !0;return arguments.callee(N-K(g)[l],null,o)}
 
-const possibleBipartition = solution_3;
+// alex mok's solution - alex uses `arr` to track who hates whom, and `group` to track who is on which team. by default, `group` has everyone at 0 (no team assigned). alex iterates through the array
+// and if anyone is unassigned, he kick-starts a `helper` function that assigns that person to team 1 (as opposed to team -1). then, he iterates through everyone that that person hates, and attempts
+// to recurse and assign those people to the opposite team. at the start of the `helper` call, he checks whether the person he is trying to assign to a certain team has already been assigned to the
+// other team - if so, he returns `false`. else, if that person is already assigned to the correct team (or he is assigning that person now) then he returns `true`.
+var solution_4 = function (N, dislikes) {
+  const arr = [];                                           // this will store who hates whom
+  const group = new Array(N + 1).fill(0);                   // this stores which team everyone is on (1 or -1, or 0 for unassigned)
+  let num = N + 1;
+  while (num--) arr.push(new Array());                      // initialize `arr` with an empty array for each bucket
+  for (let [a,b] of dislikes) {                             // parse mutual hate relationship from `dislikes` into `arr`
+    arr[a].push(b);
+    arr[b].push(a);
+  }
+  for (let i = 1; i <= N; i++) {                            // iterate through everyone...
+    if (group[i] === 0 && !helper(i, 1)) return false;      // ...and assign any unassigned person to team 1, kick-starting the recursive process. if any `helper` call comes back `false`, return `false`
+  }
+  return true;                                              // ...otherwise, if no recursive calls come back `false`, return `true`
+  function helper (i, j) {                                  // `helper` definition: `i` marks the person, and `j` marks the team we want to assign that person to (1 or -1)
+    if (group[i] !== 0) {                                   // if person `i` is already on a team...
+      if (group[i] !== j) return false;                     // ...return whether that person is already on team `j` (which we want that person to be assigned to now)
+      else return true;
+    }
+    if (arr[i].length === 0) {                              // if person `i` doesn't hate anyone...
+      group[i] = j;
+      return true;                                          // ...return `true` (base case)
+    }
+    group[i] = j;                                           // assign `i` to team `j`, as we intended
+    for (let val of arr[i]) {                               // else, if person `i` hates people...
+      if (!helper(val, -1 * j)) {                           // attempt to recurse `helper` on everyone `i` hates, and assign those people to the opposite team (`-1 * j`). if any call comes back `false`...
+        return false;                                       // ...then we can return `false` here...
+      }
+    }
+    return true;                                            // ...else, we can return `true`
+  }
+};
+
+// alex mok's one-liner - basically the above (won't work on node but works on leetcode)
+var solution_5=(N,d)=>{a=[];g=Array(N+1).fill(0);c=N+1;while(c--) a.push(Array());for([x,y] of d){a[x].push(y);a[y].push(x)};for(i=1;i<=N;i++){if(g[i]==0&&!h(i,1))return 0}return 1;function h(i,j){if(g[i]!=0){if(g[i]!=j)return 0;else return 1}if(a[i].length==0){g[i]=j;return 1}g[i]=j;for(val of a[i])if(!h(val,-1*j))return 0;return 1}}
+
+// my improvement on alex mok's one-liner
+var solution_6=(N,d,g=Array(N+1).fill(0),a=g.map(_=>[]),h=(i,t)=>{if(g[i])return g[i]==t;g[i]=t;for(v of a[i]){if(!h(v,t*-1))return !6}return !0})=>{for([x,y]of d){a[x].push(y);a[y].push(x)}for(i=1;i<=N;++i){if(!g[i]&&!h(i,1))return !9}return !0}
+
+const possibleBipartition = solution_6;
 
 // const specialTest = (...args) => {
 // };
