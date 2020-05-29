@@ -67,7 +67,16 @@ function solution_1 (numCourses, prerequisites) {
 // one-liner - basically the above
 var solution_2=(n,p,A=Array,R=!0,r=A(n).fill(0).map(_=>new Set()),s={},h=(c,x=!0)=>c in s?s[c]:(s[c]=!6,[...r[c]].map(p=>h(p)?0:x=!1),s[c]=x))=>p.map(x=>r[x[0]].add(x[1]))&&A(n).fill(0).map((_,i)=>R=h(i)?R:!9)&&R
 
-const canFinish = solution_2;
+// thomas luo's one-liner - helper function (`h`) returns `true` is there's an issue, or `false` otherwise. when we visit a course (`c`) we set `d[c]` to `true`. if no issues, we set `d[c]` to `false`.
+var solution_3=(n,p,g={},t={},d={},h=c=>d[c]?1:(g[c]?!((d[c]=1)&!g[c].some(e=>h(e))&(t[c]=1)&!(d[c]=0)):!(t[c]=1)))=>{for([z,b]of p)g[b]?g[b].push(z):g[b]=[z];for(i=0;i<n;)if(h(i++))return !1;return !0}
+
+// alex mok's improvement to thomas' one-liner
+var solution_4=(n,p,g={},t={},d={},h=c=>d[c]?1:(g[c]?!((d[c]=1)&!g[c].some(e=>h(e))&(t[c]=1)&!(d[c]=0)):!(t[c]=1)))=>p.map(([z,b])=>g[b]?g[b].push(z):g[b]=[z])&&[...Array(n)].every((_,i)=>!h(i))
+
+// my improvement to alex mok's improvement
+var solution_5=(n,p,g={},t={},d={},h=c=>d[c]?1:(g[c]?!((d[c]=1)&!g[c].some(e=>h(e))&(t[c]=1)&!(d[c]=0)):!(t[c]=1)))=>p.map(([z,b])=>g[b]?g[b].push(z):g[b]=[z])&&![...Array(n)].some((_,i)=>h(i))
+
+const canFinish = solution_5;
 
 // const specialTest = (...args) => {
 // };
@@ -80,7 +89,7 @@ let input, expected;
 const func = canFinish;
 const sortedFunc = (...args) => func(...args).sort();                   // used when the order of the output does not matter
 const modFunc = (...args) => func(...args) % 1000000007;                // used when the output is very large
-const lowestTest = 2 || 0;
+const lowestTest = 0 || 0;
 const highestTest = 0 || Infinity;
 
 // Test case 1
