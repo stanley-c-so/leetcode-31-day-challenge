@@ -50,7 +50,10 @@ function solution_3 (num) {
 // one-liner - basically the above
 var solution_4=(n,o=[0])=>{for(i=1;i<=n;++i)o.push(o[i&(i-1)]+1);return o}
 
-const countBits = solution_2;
+// thomas luo's improvement on my one-liner (saves a character)
+var solution_5=(n,o=[0])=>{for(i=1;i<=n;o.push(o[i&(i++-1)]+1));return o}
+
+const countBits = solution_5;
 
 // const specialTest = (...args) => {
 // };
