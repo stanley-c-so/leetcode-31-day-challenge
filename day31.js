@@ -86,7 +86,10 @@ function solution_2 (word1, word2) {
 // one-liner - basically solution 1
 var solution_3=(a,b,l='length',w=a[l],h=b[l],A=Array,g=A.from({[l]:h+1},()=>A(w+1).fill(0)))=>g.map((R,r)=>r?R.map((_,c)=>c?(X=g[r-1][c-1],R[c]=a[c-1]==b[r-1]?X:Math.min(X,g[r-1][c],R[c-1])+1):R[c]=r):R.map((_,c)=>R[c]=c))&&g[h][w]
 
-const minDistance = solution_3;
+// alex mok's one-liner - very neat trick with setting up `p` (previous row) initially using .keys()
+var solution_4=(s,t,T=t.length,p=[...Array(T+1).keys()])=>{for(i=1;i<=s.length;i++){c=[i];for(j=1;j<=T;j++){c[j]=s[i-1]==t[j-1]?p[j-1]:Math.min(p[j-1],p[j],c[j-1])+1}p=c}return p[T]}
+
+const minDistance = solution_4;
 
 // const specialTest = (...args) => {
 // };
